@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Arrays;
 
 /**
  * Homework 3 for CMPT 166, Spring 2016, Trinity Western University.
@@ -70,14 +71,19 @@ public class ArrayStat {
 	private void generateRandomArray(int arrayLength) {
 		Random randomGenerator = new Random();
 		numberArray = new int[arrayLength];
-		for (int element : numberArray) {
-			element = randomGenerator.nextInt(101); //Exclusive bound, 0-100
+		for (int i = 0; i < numberArray.length; i++) {
+			numberArray[i] = randomGenerator.nextInt(101); //Exclusive bound, 0-100
 		}
 	}
 	
 	
 	public void sort() {
+		sortedNumberArray = new int[numberArray.length];
+		for (int i = 0; i < numberArray.length; i++) {
+			sortedNumberArray[i] = numberArray[i];
+		}
 		// TODO: Implement Sort
+		Arrays.sort(sortedNumberArray);
 	}
 	
 	/**
@@ -127,11 +133,16 @@ public class ArrayStat {
 		else if (numberArray == null && sortedNumberArray == null) {
 			return "Empty ArrayStat: Array is not initialized";
 		}
-		String returnString = "ArrayStat object of length " 
-				+ sortedNumberArray.length + "\n";
+		String returnString = String.format("ArrayStat object of length %d \n", 
+				sortedNumberArray.length);
 		
-		for (int element : sortedNumberArray) {
-			returnString += element + " ";
+		int maxLength = Integer.toString(
+				sortedNumberArray[sortedNumberArray.length-1]).length();
+		for (int i = 0; i < sortedNumberArray.length; i++) {
+			returnString += String.format("%"+maxLength+"d ", sortedNumberArray[i]);
+			if ((i + 1) % 20 == 0) {
+				returnString += "\n";
+			}
 		}
 		returnString += "\n";
 		return returnString;
