@@ -75,7 +75,43 @@ public class ArrayStat {
 		}
 	}
 	
+	
 	public void sort() {
 		// TODO: Implement Sort
+	}
+	
+	/**
+	 * Checks if sorted arrays contain same values.
+	 * @param otherArray An initialized ArrayStat object to compare.
+	 * @return Only true if if the values of the array are the same, 
+	 * (not the order). Compares sorted arrays.
+	 */
+	public boolean equals(ArrayStat otherArray) {
+		if (otherArray == null || otherArray.getClass() != this.getClass()) {
+			return false;
+		}
+		
+		if (this.sortedNumberArray == null && this.numberArray != null) {
+			this.sort();
+		}
+		if (otherArray.sortedNumberArray == null && 
+				otherArray.numberArray != null) {
+			otherArray.sort();
+		}
+		
+		if (this.sortedNumberArray.length 
+				!= otherArray.sortedNumberArray.length) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < sortedNumberArray.length; i ++) {
+				if (otherArray.sortedNumberArray[i] 
+						!= this.sortedNumberArray[i]) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 }
