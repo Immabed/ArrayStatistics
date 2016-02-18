@@ -16,6 +16,15 @@ public class ArrayStat {
 	 * The sorted array of numberArray's elements.
 	 */
 	private int[] sortedNumberArray;
+	/**
+	 * The statistics for how many elements are in each subdivision.
+	 * 0 : 1 - 20
+	 * 1 : 21 - 40
+	 * 2 : 41 - 60
+	 * 3 : 61 - 80
+	 * 4 : 81 - 100
+	 */
+	private int[] arrayStatistics = new int[5];
 	
 	/**
 	 * If no array length is provided, this will be used in the initialization
@@ -84,6 +93,21 @@ public class ArrayStat {
 		}
 		// TODO: Implement Sort
 		Arrays.sort(sortedNumberArray);
+	}
+	
+	/**
+	 * 
+	 * @param breakPoint 
+	 * @return The index of the last element less than or equal to breakPoint
+	 */
+	private int binarySearch(int breakPoint) {
+		if (sortedNumberArray == null) {
+			return -1;
+		}
+		int index = sortedNumberArray.length;
+		
+		
+		return index;
 	}
 	
 	/**
