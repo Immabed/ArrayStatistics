@@ -114,4 +114,26 @@ public class ArrayStat {
 		
 		return true;
 	}
+	
+	/**
+	 * Returns the length of the array, as well as every element in the sorted
+	 * array in order.
+	 * @return The length of the array, and every element of the sorted array.
+	 */
+	public String toString() {
+		if (sortedNumberArray == null && numberArray != null) {
+			sort();
+		}
+		else if (numberArray == null && sortedNumberArray == null) {
+			return "Empty ArrayStat: Array is not initialized";
+		}
+		String returnString = "ArrayStat object of length " 
+				+ sortedNumberArray.length + "\n";
+		
+		for (int element : sortedNumberArray) {
+			returnString += element + " ";
+		}
+		returnString += "\n";
+		return returnString;
+	}
 }
