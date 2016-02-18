@@ -98,16 +98,36 @@ public class ArrayStat {
 	/**
 	 * 
 	 * @param breakPoint 
-	 * @return The index of the last element less than or equal to breakPoint
+	 * @return The index of the first element greater than breakPoint
 	 */
 	private int binarySearch(int breakPoint) {
 		if (sortedNumberArray == null) {
 			return -1;
 		}
-		int index = sortedNumberArray.length;
-		
-		
-		return index;
+		/**
+		 * high : one greater than last index in search range
+		 * low : first index in search range
+		 * mid : midpoint of range
+		 * When high = low + 1, only one element is left in the range
+		 */
+		int high = sortedNumberArray.length;
+		int low = 0;
+		int mid = (high - low) / 2;
+		while (high < low + 1) {
+			mid = (high - low) / 2;
+			if (sortedNumberArray[mid] > breakPoint) {
+				high = mid;
+			}
+			else if (sortedNumberArray[mid] <= breakPoint) {
+				low = mid;
+			}
+		}
+		/**
+		 * high is returned because it represents the index after the last 
+		 * element less than or equal to breakPoint. That is the same as the
+		 * number of elements less than or equal to breakPoint.
+		 */
+		return high;
 	}
 	
 	/**
