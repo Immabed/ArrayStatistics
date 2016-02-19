@@ -113,25 +113,7 @@ public class ArrayStat {
 	 */
 	public void getStatistics() { 
 		if (arrayStatistics == null) {
-			if (!ensureArraysArePopulated()) {
-				System.out.println("Arrays are empty,cannot comply.");
-				return;
-			}
-			/**
-			 * The statistics for how many elements are in each subdivision.
-			 * 0 : 1 - 20
-			 * 1 : 21 - 40
-			 * 2 : 41 - 60
-			 * 3 : 61 - 80
-			 * 4 : 81 - 100
-			 */
-			arrayStatistics = new int[5];
-			int runningTotal = 0;
-			for (int i = 0; i < arrayStatistics.length; i++) {
-				arrayStatistics[i] = binarySearch(CLASS_INTERVAL 
-						+ (CLASS_INTERVAL * i)) - runningTotal;
-				runningTotal += arrayStatistics[i];
-			}
+			generateStatistics();
 		}
 		int maxLength = Integer.toString(
 				sortedNumberArray[sortedNumberArray.length - 1]).length();
@@ -145,6 +127,28 @@ public class ArrayStat {
 			System.out.println("  " + arrayStatistics[i]);
 		}
 		
+	}
+	
+	private void generateStatistics() {
+		if (!ensureArraysArePopulated()) {
+			System.out.println("Arrays are empty,cannot comply.");
+			return;
+		}
+		/**
+		 * The statistics for how many elements are in each subdivision.
+		 * 0 : 1 - 20
+		 * 1 : 21 - 40
+		 * 2 : 41 - 60
+		 * 3 : 61 - 80
+		 * 4 : 81 - 100
+		 */
+		arrayStatistics = new int[5];
+		int runningTotal = 0;
+		for (int i = 0; i < arrayStatistics.length; i++) {
+			arrayStatistics[i] = binarySearch(CLASS_INTERVAL 
+					+ (CLASS_INTERVAL * i)) - runningTotal;
+			runningTotal += arrayStatistics[i];
+		}
 	}
 	
 	/**
