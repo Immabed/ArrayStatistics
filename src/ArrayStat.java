@@ -16,21 +16,18 @@ public class ArrayStat {
 	 * The sorted array of numberArray's elements.
 	 */
 	private int[] sortedNumberArray;
-	/**
-	 * The statistics for how many elements are in each subdivision.
-	 * 0 : 1 - 20
-	 * 1 : 21 - 40
-	 * 2 : 41 - 60
-	 * 3 : 61 - 80
-	 * 4 : 81 - 100
-	 */
-	private int[] arrayStatistics = new int[5];
+	
+	private int[] arrayStatistics;
 	
 	/**
 	 * If no array length is provided, this will be used in the initialization
 	 * of numberArray.
 	 */
 	private final static int DEFAULT_ARRAY_SIZE = 300;
+	/**
+	 * The size of statistic ranges, array sizes should be a multiple of this.
+	 */
+	private final static int CLASS_INTERVAL = 20;
 	
 	/**
 	 * Creates and sorts an array using the default array size.
@@ -95,6 +92,61 @@ public class ArrayStat {
 		Arrays.sort(sortedNumberArray);
 	}
 	
+	private boolean ensureArraysArePopulated() {
+		if (sortedNumberArray == null) {
+			if (numberArray == null) {
+				generateRandomArray(DEFAULT_ARRAY_SIZE);
+			}
+			sort();
+		}
+		if (sortedNumberArray != null && numberArray != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Prints out the statistics to screen. If statistics have not been generated,
+	 * generates statistics.
+	 */
+	public void getStatistics() { 
+		if (arrayStatistics == null) {
+			if (!ensureArraysArePopulated()) {
+				System.out.println("Arrays are empty,cannot comply.");
+				return;
+			}
+			/**
+			 * The statistics for how many elements are in each subdivision.
+			 * 0 : 1 - 20
+			 * 1 : 21 - 40
+			 * 2 : 41 - 60
+			 * 3 : 61 - 80
+			 * 4 : 81 - 100
+			 */
+			arrayStatistics = new int[5];
+			int runningTotal = 0;
+			for (int i = 0; i < arrayStatistics.length; i++) {
+				arrayStatistics[i] = binarySearch(CLASS_INTERVAL 
+						+ (CLASS_INTERVAL * i)) - runningTotal;
+				runningTotal += arrayStatistics[i];
+			}
+		}
+		int maxLength = Integer.toString(
+				sortedNumberArray[sortedNumberArray.length - 1]).length();
+		for (int i = 0; i < arrayStatistics.length; i++) {
+			System.out.printf("%"+maxLength+"d - %"+maxLength+"d: ", 
+					(i * CLASS_INTERVAL) + 1, (i + 1) * CLASS_INTERVAL); //TODO: Support odd length arrays
+			for (int n = 0; n <= (arrayStatistics[i] * DEFAULT_ARRAY_SIZE 
+					/ numberArray.length); n++) {
+				System.out.print("*");
+			}
+			System.out.println("  " + arrayStatistics[i]);
+		}
+		
+	}
+	
 	/**
 	 * 
 	 * @param breakPoint 
@@ -113,8 +165,8 @@ public class ArrayStat {
 		int high = sortedNumberArray.length;
 		int low = 0;
 		int mid = (high - low) / 2;
-		while (high < low + 1) {
-			mid = (high - low) / 2;
+		while (high > low + 1) {
+			mid = low + (high - low) / 2;
 			if (sortedNumberArray[mid] > breakPoint) {
 				high = mid;
 			}
