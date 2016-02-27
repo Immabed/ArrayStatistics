@@ -71,15 +71,24 @@ public class ArrayStat {
 	
 	/**
 	 * Initializes numberArray with the specified length, and fills it with
-	 * random integers between 1 and 100 (inclusive).
+	 * random integers according to {@link #monteCarloNumber()}
 	 * @param arrayLength The number of elements to create in numberArray.
 	 */
 	private void generateRandomArray(int arrayLength) {
 		Random randomGenerator = new Random();
 		numberArray = new int[arrayLength];
 		for (int i = 0; i < numberArray.length; i++) {
-			numberArray[i] = randomGenerator.nextInt(100) + 1; //Exclusive bound, 1-100
+			numberArray[i] = generateRandomNumber();
 		}
+	}
+	
+	/**
+	 * Returns a random number between 1-100 (inclusive).
+	 * @return Random integer from [1, 100].
+	 */
+	private int generateRandomNumber() {
+		Random randomGenerator = new Random();
+		return randomGenerator.nextInt(100) + 1; //Exclusive bound, 1-100
 	}
 	
 	
