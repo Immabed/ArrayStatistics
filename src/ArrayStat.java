@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Arrays;
 
 /**
  * Homework 3 for CMPT 166, Spring 2016, Trinity Western University.
