@@ -75,7 +75,6 @@ public class ArrayStat {
 	 * @param arrayLength The number of elements to create in numberArray.
 	 */
 	private void generateRandomArray(int arrayLength) {
-		Random randomGenerator = new Random();
 		numberArray = new int[arrayLength];
 		for (int i = 0; i < numberArray.length; i++) {
 			numberArray[i] = generateRandomNumber();
