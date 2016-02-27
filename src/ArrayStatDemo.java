@@ -6,7 +6,10 @@ public class ArrayStatDemo {
 			+ "-h -help: Display help.\n"
 			+ "-l <int>, -length <int>: Custom array length, default 300.\n";
 	public static void main(String[] args) {
+		
 		int arrayLength = 300;
+		
+		// Program Arguments
 		for (int i = 0; i < args.length; i++) {
 			switch (args[i]) {
 			case "-h" :
@@ -23,6 +26,8 @@ public class ArrayStatDemo {
 				break;
 			}
 		}
+		
+		// Demo Code
 		ArrayStat statDemo = new ArrayStat(arrayLength);
 		System.out.println(statDemo);
 		statDemo.getStatistics();
