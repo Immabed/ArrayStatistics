@@ -1,10 +1,17 @@
-
+/**
+ * A program to demonstrate the ArrayStat class.
+ * @author Brady Coles
+ */
 public class ArrayStatDemo {
 
+	/**
+	 * For display when the -h program argument is used.
+	 */
 	private static final String HELP = 
 			"Help:\n"
 			+ "-h -help: Display help.\n"
 			+ "-l <int>, -length <int>: Custom array length, default 300.\n";
+	
 	public static void main(String[] args) {
 		
 		int arrayLength = 300;
